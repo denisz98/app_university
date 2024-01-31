@@ -4,7 +4,7 @@ from university_app.models import *
 
 
 class Estudiante_admin(admin.ModelAdmin):
-    list_display = ("nombre", "carnet_identidad", "telefono","fecha")
+    list_display = ("nombre", "carnet_identidad", "telefono")
     search_fields = ("nombre","telefono")
     list_filter = ("nombre")
 
