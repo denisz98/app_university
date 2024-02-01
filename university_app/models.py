@@ -39,7 +39,7 @@ class Clase (models.Model):
     id_clase = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=50,verbose_name='Nombre')
     agno = models.IntegerField(verbose_name='Año')
-    diciplina = models.ForeignKey(Disciplina,blank=True, null=True,on_delete=models.CASCADE)
+    disciplina = models.ForeignKey(Disciplina,blank=True, null=True,on_delete=models.CASCADE)
     profesor = models.ForeignKey(Profesor,blank=True, null=True,on_delete=models.CASCADE)
     
     class Meta:
