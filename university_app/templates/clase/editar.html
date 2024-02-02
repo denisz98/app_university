@@ -1,86 +1,41 @@
- {% extends 'base/base.html' %} {% block sidebar %}{% load static %}
-<div class="page-sidebar-wrapper ">
-    <div class="page-sidebar navbar-collapse collapse ">
-        <ul class="page-sidebar-menu page-header-fixed page-sidebar-menu-closed " data-keep-expanded="false " data-auto-scroll="true " data-slide-speed="200 " style="padding-top: 20px ">
-            <li class="sidebar-toggler-wrapper hide ">
-                <div class="sidebar-toggler ">
-                    <span></span>
-                </div>
-            </li>
-
-
-            <!---------------------- CLASES ----------------------------->
-
-            <li class="nav-item start ">
-                <a href="{% url 'Clase' %} " class="nav-link nav-toggle ">
-                    <i class="fa fa-book "></i>
-                    <span class="title ">Clase</span>
-                </a>
-            </li>
-            <!----------------------------- PROFESOR -------------------------------------->
-
-            <li class="nav-item start ">
-                <a href="# " class="nav-link nav-toggle ">
-                    <i class="fa fa-users "></i>
-                    <span class="title ">Profesor</span>
-                </a>
-            </li>
-
-
-            <!------------------------------------ ESTUDIANTE ----------------------------->
-
-
-            <li class="nav-item start ">
-                <a href="{% url 'Estudiante'%}" class="nav-link nav-toggle ">
-                    <i class="fa fa-graduation-cap "></i>
-                    <span class="title ">Estudiante</span>
-                </a>
-            </li>
-
-
-        </ul>
-    </div>
-</div>
-{% endblock sidebar %}{% block content %} {% load crispy_forms_tags %}
-
-
-
+{% extends 'base/base.html' %} {% block content %}
 <div class="page-content-wrapper" style="background: #4276A4;">
     <div class="page-content">
-
-
-
-
-
-
         <div class="portlet light bordered" style="width: 40%; margin: auto;">
             <div class="portlet-title">
                 <div class="caption font-red-sunglo">
                     <i class="fa fa-book font-red"></i>
                     <span class="caption-subject bold uppercase"> Clase</span>
-
                 </div>
                 <div style="text-align: right;">
-                    <a class="btn green float-right" style="height: 25px; padding: 0px 5px 2px 5px ; margin: 10px 0px 2px 0px; " href="{% url 'Clase' %} ">Atrás<i class="fa fa-reply"></i></a>
-
+                    <a class="btn green float-right"
+                        style="height: 25px; padding: 0px 5px 2px 5px ; margin: 10px 0px 2px 0px; "
+                        href="{% url 'Clase' %} ">Atrás<i class="fa fa-reply"></i></a>
                 </div>
-
             </div>
-
-
-
             <form action="" method="POST">
                 {% csrf_token %}
 
                 <div class="portlet-body form">
                     <form role="form">
-                        <div class="form-body">
-
-
-                            {{miformulario}}
-
+                        {% for field in miformulario %}
+                        <div class="mb-3">
+                          <label for="{{field.name}}" class="form-label">{{field.name}}</label>
+                          <input type="{{field.field.widget.input_type}}" 
+                            class="form-control"
+                            name="{{field.name}}" 
+                             id="{{field.name}}"
+                             aria-describedby="helpId"
+                             placeholder="{{field.name}}"
+                             value="{{field.value | default:''}}">
+                        
+                         
                         </div>
-                        <input type="submit" class="btn blue" style="height: 25px; padding: 0px 10px 2px 10px ;margin: 0px 20px 2px 10px; " value="Guardar">
+                        <div class="col-12 help-text">{{field.errors}}</div>
+                        
+                        {% endfor %}
+                        <input type="submit" class="btn blue" style="margin: 10px" value="Guardar">
+
 
                     </form>
                 </div>
@@ -88,7 +43,4 @@
 
     </div>
 </div>
-
-
-
 {% endblock content %}

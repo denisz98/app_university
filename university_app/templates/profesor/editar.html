@@ -9,11 +9,11 @@
             <div class="portlet-title">
                 <div class="caption font-red-sunglo">
                     <i class="fa fa-book font-red"></i>
-                    <span class="caption-subject bold uppercase"> Clase</span>
+                    <span class="caption-subject bold uppercase"> Profesor</span>
 
                 </div>
                 <div style="text-align: right;">
-                    <a class="btn green float-right" style="height: 25px; padding: 0px 5px 2px 5px ; margin: 10px 0px 2px 0px; " href="{% url 'Clase' %} ">Atrás<i class="fa fa-reply"></i></a>
+                    <a class="btn green float-right" style="height: 25px; padding: 0px 5px 2px 5px ; margin: 10px 0px 2px 0px; " href="{% url 'Profesor' %} ">Atrás<i class="fa fa-reply"></i></a>
 
                 </div>
 
@@ -26,7 +26,9 @@
 
                 <div class="portlet-body form">
                     <form role="form">
+                        
                         {% for field in miformulario %}
+                        {% if field.name != 'grado_cientifico' and field.name != 'categoria_docente'%}
                         <div class="mb-3">
                           <label for="{{field.name}}" class="form-label">{{field.name}}</label>
                           <input type="{{field.field.widget.input_type}}" 
@@ -36,6 +38,22 @@
                              aria-describedby="helpId"
                              placeholder="{{field.name}}"
                              value="{{field.value | default:''}}">
+                            {% elif field.name == 'grado_cientifico' %}
+                        <label for="{{field.name}}" class="form-label">{{field.name}}</label>
+                        <select name="{{field.name}}" id="{{field.name}}" class="form-control">
+                            <option value="Ninguno">Ninguno</option>
+                            <option value="Máster">Máster</option>
+                            <option value="Doctor">Doctor</option>
+                        </select>
+                        {% elif field.name == 'categoria_docente' %}
+                        <label for="{{field.name}}" class="form-label">{{field.name}}</label>
+                        <select name="{{field.name}}" id="{{field.name}}" class="form-control">
+                            <option value="Instructor">Instructor</option>
+                            <option value="Auxiliar">Auxiliar</option>
+                            <option value="Docente">Docente</option>
+                            <option value="Titular">Titular</option>
+                        </select>
+                        {% endif %}
                         
                          
                         </div>

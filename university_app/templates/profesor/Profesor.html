@@ -10,7 +10,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-book font-red"></i>
-                    <span class="caption-subject font-red sbold uppercase">Clases</span>
+                    <span class="caption-subject font-red sbold uppercase">Profesores</span>
                 </div>
 
             </div>
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <a class="btn green " href='{% url "insertar_clase" %}''>Insertar<i class="fa fa-plus"></i></a>
+                                <a class="btn green " href='{% url "insertar_profesor" %}'>Insertar<i class="fa fa-plus"></i></a>
                             </div>
                         </div>
 
@@ -33,25 +33,27 @@
                             <thead>
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Username : activate to sort column descending" aria-sort="ascending" style="width: auto;"> Nombre </th>
-                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Full Name : activate to sort column ascending" style="width: auto;"> Año </th>
-                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Points : activate to sort column ascending" style="width: auto;"> Disciplina </th>
-                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Notes : activate to sort column ascending" style="width: auto;"> Responsable </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Full Name : activate to sort column ascending" style="width: auto;"> Carnet </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Points : activate to sort column ascending" style="width: auto;"> Teléfono </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Notes : activate to sort column ascending" style="width: auto;"> Grado científico </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Notes : activate to sort column ascending" style="width: auto;"> Categoría docente </th>
                                     <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Edit : activate to sort column ascending" style="width: 70px; text-align: center;"> Editar </th>
                                     <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Delete : activate to sort column ascending" style="width: 70px; text-align: center; "> Eliminar </th>
                                 </tr>
                             </thead>
                             <tbody>
-                              {% for i in clases1 %}
+                              {% for i in profesores %}
                                 <tr role="row" class="odd">
                                     <td class="sorting_1" style="padding:0px 0px 0px 20px ;"> {{i.nombre}} </td>
-                                    <td style="padding:0px 0px 0px 20px ;"> {{i.agno}} </td>
-                                    <td style="padding:0px 0px 0px 20px ;"> {{i.disciplina}} </td>
-                                    <td class="center" style="padding:0px 0px 0px 20px ;"> {{i.profesor}} </td>
+                                    <td style="padding:0px 0px 0px 20px ;"> {{i.carnet_identidad}} </td>
+                                    <td style="padding:0px 0px 0px 20px ;"> {{i.telefono}} </td>
+                                    <td class="center" style="padding:0px 0px 0px 20px ;"> {{i.grado_cientifico}} </td>
+                                    <td class="center" style="padding:0px 0px 0px 20px ;"> {{i.categoria_docente}} </td>
                                     <td style="text-align: center;">
-                                        <a class="btn blue" style="height: 25px; padding: 2px 5px 2px 5px ;" href='{% url "editar_clase" i.id_clase %}'> Editar </a>
+                                        <a class="btn blue" style="height: 25px; padding: 2px 5px 2px 5px ;" href='{% url "editar_profesor" i.id_profesor %}'> Editar </a>
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href='{% url "eliminar_clase" i.id_clase %}' class="btn red" style="height: 25px; padding: 2px 5px 2px 5px ;" onclick="return confirm('Confirmar eliminación');">Eliminar</a>
+                                        <a href='{% url "eliminar_profesor" i.id_profesor %}' class="btn red" style="height: 25px; padding: 2px 5px 2px 5px ;" onclick="return confirm('Confirmar eliminación');">Eliminar</a>
                                     </td>
                                 </tr>
                                 {% endfor %}
