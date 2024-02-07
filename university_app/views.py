@@ -86,7 +86,7 @@ def editar_profesor(request, id_profesor):
         if formulario.is_valid():
             formulario.save()
             return redirect('Profesor')
-    return render(request, 'profesor/editar.html', {'miformulario': formulario})
+    return render(request, 'profesor/insertar.html', {'miformulario': formulario})
 
 def eliminar_profesor(request,id_profesor):
     
@@ -95,3 +95,38 @@ def eliminar_profesor(request,id_profesor):
     profesor.delete()
     
     return redirect("Profesor")
+
+
+
+
+def estudiante(request):
+    estudiantes = Estudiante.objects.all()
+    estudiante = []
+    for i in estudiantes:
+        e = []
+        for j in i.clase.all():
+            e.append(Clase.objects.get(pk =j.id_clase))
+        estudiante.append({'id_estudiante':i.id_estudiante,'nombre':i.nombre,"carnet_identidad":i.carnet_identidad,'telefono':i.telefono,'direccion':i.direccion,'agno_academico':i.agno_academico,'clase':e})
+
+    return render(request,'estudiante/estudiante.html',{"estudiantes":estudiante})
+
+
+def insertar_estudiante(request):
+    
+    form=Formulario_estudiante (request.POST or None)
+        
+    if form.is_valid():
+        form.save()
+        return redirect('Estudiante')
+    else: print('Error')
+    return render(request, 'estudiante/form.html',{'miformulario':form})
+
+def editar_estudiante(request, id_estudiante):
+    estudiante = Estudiante.objects.get(id_estudiante=id_estudiante)
+    formulario = Formulario_estudiante(instance=estudiante)
+    if request.method == 'POST':
+        formulario = Formulario_estudiante(request.POST, instance=estudiante)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('Estudiante')
+    return render(request, 'estudiante/form.html', {'miformulario': formulario})

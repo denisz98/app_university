@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="page-content-wrapper" style="background: #4276A4;">
+    <div class="page-content">
+        <div class="portlet light bordered" style="width: 40%; margin: auto;">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="fa fa-book font-red"></i>
+                    <span class="caption-subject bold uppercase"> Estudiante</span>
+                </div>
+                <div style="text-align: right;">
+                    <a class="btn green float-right"
+                        style="height: 25px; padding: 0px 5px 2px 5px ; margin: 10px 0px 2px 0px; "
+                        href="{% url 'Clase' %} ">Atrás<i class="fa fa-reply"></i></a>
+                </div>
+            </div>
+            <style>
+                .form-container {
+                    width: 50%;
+                    margin: auto;
+                    text-align: center;
+                }
+            
+                .form-group {
+                    margin-bottom: 10px;
+                }
+            
+                .form-group input {
+                    width: 100%;
+                    padding: 5px;
+                    margin-top: 5px;
+                }
+            
+                .btn-primary {
+                    background-color: #007bff;
+                    color: white;
+                    padding: 8px 16px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+            </style>
+            
+            <form method="post" action="{% url 'insertar_estudiante' %}" class="form-container">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_nombre">Nombre:</label>
+                    {{ miformulario.nombre }}
+                </div>
+                <div class="form-group">
+                    <label for="id_carnet_identidad">Carnet de Identidad:</label>
+                    {{ miformulario.carnet_identidad }}
+                </div>
+                <div class="form-group">
+                    <label for="id_telefono">Teléfono:</label>
+                    {{ miformulario.telefono }}
+                </div>
+                <div class="form-group">
+                    <label for="id_direccion">Dirección:</label>
+                    {{ miformulario.direccion }}
+                </div>
+                <div class="form-group">
+                    <label for="id_agno_academico">Año Académico:</label>
+                    {{ miformulario.agno_academico }}
+                </div>
+                <div class="form-group">
+                    <label for="id_clase">Clase:</label>
+                    <select name="clase" id="id_clase" multiple style="width: 100%; padding: 5px; margin-top: 5px;">
+                        {% for clase in miformulario.fields.clase.queryset %}
+                            <option value="{{ clase.pk }}">{{ clase }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+                </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

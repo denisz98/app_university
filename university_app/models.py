@@ -59,7 +59,6 @@ class Estudiante (models.Model):
     telefono = models.CharField(max_length=10,verbose_name='Teléfono')
     direccion = models.CharField(max_length=10,verbose_name='Dirección')
     agno_academico = models.CharField(max_length=10,verbose_name='Año académico', choices=agno_academico)
-    fecha = models.DateField(null= True)
     clase = models.ManyToManyField(Clase,blank=True)
 
     def __str__(self):

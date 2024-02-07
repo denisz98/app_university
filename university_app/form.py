@@ -19,3 +19,7 @@ class Formulario_profesor(forms.ModelForm):
     class Meta:
         model=Profesor
         fields='__all__'
+class Formulario_estudiante(forms.ModelForm):
+    class Meta:
+        model=Estudiante
+        fields='__all__'

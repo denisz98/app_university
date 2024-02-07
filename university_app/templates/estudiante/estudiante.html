@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="page-content-wrapper" style="background: #4276A4;">
+    <div class="page-content">
+
+        <div class="portlet light portlet-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-graduation-cap font-red"></i>
+                    <span class="caption-subject font-red sbold uppercase">Estudiantes</span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <a class="btn green " href='{% url "insertar_estudiante" %}''>Insertar<i class="fa fa-plus"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="sample_editable_1_wrapper" class="dataTables_wrapper no-footer">
+
+                    <div class="table-scrollable">
+                        <table class="table table-striped table-hover table-bordered dataTable no-footer" id="sample_editable_1" role="grid" aria-describedby="sample_editable_1_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Username : activate to sort column descending" aria-sort="ascending" style="width: auto;"> Nombre </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Full Name : activate to sort column ascending" style="width: auto;"> Carnet </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Points : activate to sort column ascending" style="width: auto;"> Teléfono </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Notes : activate to sort column ascending" style="width: auto;"> Dirección </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Notes : activate to sort column ascending" style="width: auto;"> Año </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Notes : activate to sort column ascending" style="width: auto;"> Clase </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Edit : activate to sort column ascending" style="width: 70px; text-align: center;"> Editar </th>
+                                    <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label=" Delete : activate to sort column ascending" style="width: 70px; text-align: center; "> Eliminar </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for i in estudiantes %}
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1" style="padding:0px 0px 0px 20px ;"> {{i.nombre}} </td>
+                                    <td style="padding:0px 0px 0px 20px ;"> {{i.carnet_identidad}} </td>
+                                    <td style="padding:0px 0px 0px 20px ;"> {{i.telefono}} </td>
+                                    <td class="center" style="padding:0px 0px 0px 20px ;"> {{i.direccion}} </td>
+                                    <td class="center" style="padding:0px 0px 0px 20px ;"> {{i.agno_academico}} </td>
+                                    <td class="center" style="padding:0px 0px 0px 20px ;"> {% for clase in i.clase %} {{clase.nombre}} {% if not forloop.last %}, {% endif %} {% endfor %} </td>
+                                    <td style="text-align: center;">
+                                        <a class="btn blue" style="height: 25px; padding: 2px 5px 2px 5px ;" href='{% url "editar_estudiante" i.id_estudiante %}'> Editar </a>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href='' class="btn red" style="height: 25px; padding: 2px 5px 2px 5px ;" onclick="return confirm('Confirmar eliminación');">Eliminar</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
