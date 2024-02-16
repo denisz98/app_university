@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+
 # from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,8 +43,37 @@ INSTALLED_APPS = [
     'university_app',
     'rest_framework',
     'drf_yasg',
+    'user',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',  
+    'simple_history',
 ]
-
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'DOC_EXPANSION':'none',
+    'SECURITY_DEFINITIONS': {
+        'Bearer':  {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
+AUTH_USER_MODEL = 'user.User'
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': (
+       'rest_framework.permissions.IsAuthenticated',
+    )
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
