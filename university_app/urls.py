@@ -1,5 +1,4 @@
 from django.urls import path, include
-from university_app import viewsets
 from rest_framework import routers
 from .viewsets import *
 
